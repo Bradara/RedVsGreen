@@ -1,8 +1,8 @@
-public class Cell implements Cloneable{
-    int locationX;
-    int locationY;
-    boolean isGreen;
-    GreenCounter greenCounter;
+public class Cell implements Cloneable {
+    private int locationX;
+    private int locationY;
+    private boolean isGreen;
+    private GreenCounter greenCounter;
 
     public Cell(int locationX, int locationY, int value) {
         this.locationX = locationX;
@@ -11,20 +11,40 @@ public class Cell implements Cloneable{
         this.setGreen(value);
     }
 
-    public void changeColor(){
+    public void changeColor() {
         this.isGreen = !this.isGreen;
     }
 
-    public int getGreenCounter() {
+    /**
+     * Return how many generation the cell was green.
+     *
+     * @return int
+     */
+    public int getCounter() {
         return greenCounter.getCounter();
+    }
+
+    /**
+     * Return the GreenCounter instance for the cell,
+     * inherited from generation to generation
+     *
+     * @return GreenCounter
+     */
+    public GreenCounter getGreenCounter() {
+        return greenCounter;
     }
 
     public void setGreen(int value) {
         this.isGreen = value == 1;
-        if (this.isGreen)this.greenCounter.increaseCounter();
+        if (this.isGreen) this.greenCounter.increaseCounter();
     }
 
-    //    Making Shallow copy
+    public boolean isGreen() {
+        return isGreen;
+    }
+
+
+    //Making shallow copy of the Cell class
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();

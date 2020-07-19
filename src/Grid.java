@@ -34,7 +34,7 @@ public class Grid{
     }
 
     public boolean isGreenCell(int x, int y){
-        return this.matrix[x][y].isGreen;
+        return this.matrix[x][y].isGreen();
     }
 
 
@@ -65,9 +65,6 @@ public class Grid{
                 this.nextGeneration(i, j);
             }
         }
-        printMatrix(matrixClone);
-        printMatrix(matrix);
-        System.out.println("-------");
 
         this.matrix = this.matrixClone;
     }
@@ -79,12 +76,11 @@ public class Grid{
             if (i < 0 || i >= this.x) continue;
             for (int j = y1-1; j <= y1 +1; j++) {
                 if (j < 0 || j >= this.y || (j == y1 && i == x1)) continue;
-                if (this.matrix[i][j].isGreen) countGreen++;
+                if (this.matrix[i][j].isGreen()) countGreen++;
             }
         }
 
         if (this.isGreenCell(x1, y1)) {
-//            this.matrix[x1][y1].greenCounter.increaseCounter();
             if (changeConditionGreen.contains(countGreen)) {
                 this.matrixClone[x1][y1].changeColor();
             }
@@ -92,22 +88,11 @@ public class Grid{
             this.matrixClone[x1][y1].changeColor();
         }
 
-        if (matrixClone[x1][y1].isGreen) matrixClone[x1][y1].greenCounter.increaseCounter();
+        if (matrixClone[x1][y1].isGreen()) matrixClone[x1][y1].getGreenCounter().increaseCounter();
 
     }
 
     public Cell getCellAt(int targetX, int targetY) {
         return this.matrix[targetX][targetY];
-    }
-
-    //For debugging purposes.
-    private void printMatrix(Cell[][] m){
-        for (int i = 0; i < this.x ; i++) {
-            for (int j = 0; j < this.y; j++) {
-                System.out.print(m[i][j].isGreen?1:0);
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 }

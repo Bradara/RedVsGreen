@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class RedVsGreen {
-    public static void main(String[] args) throws IOException, CloneNotSupportedException {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] input = br.readLine().split(", ");
         int x = Integer.parseInt(input[0]);
@@ -18,6 +18,6 @@ public class RedVsGreen {
             grid.turn();
         }
 
-        System.out.println(grid.getCellAt(targetX, targetY).getGreenCounter());
+        System.out.println(grid.getCellAt(targetX, targetY).getCounter());
     }
 }
